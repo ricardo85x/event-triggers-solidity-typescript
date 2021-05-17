@@ -1,5 +1,5 @@
-const HelloWorld = artifacts.require("HelloWorld");
+const ItemManager = artifacts.require("ItemManager");
 
 module.exports = function(deployer) {
-    deployer.deploy(HelloWorld)
+    deployer.deploy(ItemManager)
 }
