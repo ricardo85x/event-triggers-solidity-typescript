@@ -1,5 +1,6 @@
-### Event Trigger / Supply Chain Dapp powered by
+# Event Trigger / Supply Chain Dapp powered by
 
+- Truffle
 - Solidity
 - NextJS
 - TypeScript
