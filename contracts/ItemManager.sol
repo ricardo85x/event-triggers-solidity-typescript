@@ -33,12 +33,14 @@ contract ItemManager is Ownable {
         items[itemIndex]._identifier = _identifier;
         items[itemIndex]._price = _price;
         items[itemIndex]._state = SuplyChainState.Created;
-        itemIndex++;
+        
         emit SupplyChainStep(
             itemIndex,
             uint256(items[itemIndex]._state),
             address(item)
         );
+        
+        itemIndex++;
     }
 
     function triggerPayment(uint256 _itemIndex) public payable {

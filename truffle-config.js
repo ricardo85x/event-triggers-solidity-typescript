@@ -5,6 +5,8 @@ module.exports = {
   networks: {
     development: {
      port: 9545,
+     host: "127.0.0.1",
+     network_id: "*", // match any network
     },
   },
   compilers: {
