@@ -11,6 +11,7 @@ contract ItemManager is Ownable {
         Item _item;
         string _identifier;
         uint256 _price;
+        address _owner;
         ItemManager.SuplyChainState _state;
     }
 
@@ -24,14 +25,20 @@ contract ItemManager is Ownable {
         address _addressItem
     );
 
+
+    modifier itemOwner(uint _itemIndex) {
+        require( items[_itemIndex]._owner == msg.sender, "You are not the owner");
+        _;
+    }
+
     function createItem(string memory _identifier, uint256 _price)
         public
-        onlyOwner
     {
         Item item = new Item(this, _price, itemIndex);
         items[itemIndex]._item = item;
         items[itemIndex]._identifier = _identifier;
         items[itemIndex]._price = _price;
+        items[itemIndex]._owner = msg.sender;
         items[itemIndex]._state = SuplyChainState.Created;
         
         emit SupplyChainStep(
@@ -63,7 +70,7 @@ contract ItemManager is Ownable {
         );
     }
 
-    function triggerDelivery(uint256 _itemIndex) public onlyOwner {
+    function triggerDelivery(uint256 _itemIndex) public itemOwner(_itemIndex) {
         // need to be in paid state
         require(
             items[_itemIndex]._state == SuplyChainState.Paid,
